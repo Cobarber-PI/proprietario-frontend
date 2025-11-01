@@ -17,7 +17,50 @@
             </div>
         </div>
     </nav>
+
+    <div class="tabs">
+        <button v-for="tab in tabs" :key="tab.key" :class="{ active: activeTab === tab.key }"
+            @click="activeTab = tab.key">
+            {{ tab.label }}
+        </button>
+    </div>
+    <div class="tab-content">
+        <component :is="activeTabComponent" />
+    </div>
 </template>
+
+<script setup>
+import { ref, computed, watch, onMounted } from 'vue';
+
+import TabVisaoGeral from './tabs/TabVisaoGeral.vue';
+import TabAgendamentos from './tabs/TabAgendamentos.vue';
+import TabBarbeiros from './tabs/TabBarbeiros.vue';
+import TabClientes from './tabs/TabClientes.vue';
+import TabAvaliacoes from './tabs/TabAvaliacoes.vue';
+import TabFinanceiro from './tabs/TabFinanceiro.vue';
+import TabNotificacoes from './tabs/TabNotificacoes.vue';
+import TabConfiguracoes from './tabs/TabConfiguracoes.vue';
+
+const tabs = [
+    { label: 'Visão Geral', key: 'visao', component: TabVisaoGeral },
+    { label: 'Agendamentos', key: 'agendamentos', component: TabAgendamentos },
+    { label: 'Barbeiros', key: 'barbeiros', component: TabBarbeiros },
+    { label: 'Clientes', key: 'clientes', component: TabClientes },
+    { label: 'Avaliações', key: 'avaliacoes', component: TabAvaliacoes },
+    { label: 'Financeiro', key: 'financeiro', component: TabFinanceiro },
+    { label: 'Notificações', key: 'notificacoes', component: TabNotificacoes },
+    { label: 'Configurações', key: 'configuracoes', component: TabConfiguracoes },
+];
+const activeTab = ref(localStorage.getItem('activeTab') || 'visao');
+watch(activeTab, (newTab) => {
+    localStorage.setItem('activeTab', newTab)
+});
+
+const activeTabComponent = computed(() => {
+    const tab = tabs.find(t => t.key === activeTab.value);
+    return tab ? tab.component : null;
+});
+</script>
 
 <style scoped>
 nav {
@@ -70,7 +113,8 @@ nav {
     font-size: 14px;
     color: #8B978B;
 }
-.profile{
+
+.profile {
     border-radius: 50%;
     background-color: #F8C630;
     height: 45px;
@@ -81,8 +125,36 @@ nav {
     cursor: pointer;
     margin-left: 20px;
 }
+
 .profile img {
     width: 20px;
     height: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-bottom 0.2s;
+}
+
+.tabs button.active {
+    border-bottom: 2px solid #F8C630;
+    color: #F8C630;
+}
+
+.tab-content {
+    margin: 0 80px;
 }
 </style>
