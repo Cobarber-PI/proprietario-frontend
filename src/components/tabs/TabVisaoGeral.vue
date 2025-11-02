@@ -1,5 +1,45 @@
 <script setup>
-// ...
+import { ref } from 'vue';
+const barSeries = ref([
+  { name: 'Agendamentos', data: [10, 18, 14, 22, 28, 36, 18] }
+])
+const barOptions = ref({
+  chart: { toolbar: { show: false }, background: '#1A1A1A' },
+  colors: ['#F7C630'],
+  plotOptions: { bar: { borderRadius: 5, } },
+  xaxis: {
+    categories: ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    labels: { style: { colors: '#9aa0a6' } }
+  },
+  yaxis: {
+    labels: { style: { colors: '#9aa0a6' } },
+  },
+  grid: { borderColor: '#2a2a2a', },
+  tooltip: { theme: 'dark' },
+  dataLabels: { enabled: false },
+  legend: { show: false }
+})
+
+const lineSeries = ref([
+  { name: 'Faturamento', data: [8200, 9000, 11800, 11000, 13500, 15000] }
+])
+
+const lineOptions = ref({
+  chart: { toolbar: { show: false }, background: '#1A1A1A' },
+  stroke: { curve: 'smooth', width: 3 },
+  colors: ['#F2C94C'],
+  xaxis: {
+    categories: ['Jan','Fev','Mar','Abr','Mai','Jun'],
+    labels: { style: { colors: '#9aa0a6' } }
+  },
+  yaxis: {
+    labels: { style: { colors: '#9aa0a6' }, formatter: val => `R$ ${Number(val).toLocaleString()}` }
+  },
+  grid: { borderColor: 'rgba(255,255,255,0.03)' },
+  tooltip: { theme: 'dark' },
+  dataLabels: { enabled: false },
+  markers: { size: 4 }
+})
 </script>
 <template>
     <div class="wrapper-geral">
@@ -45,8 +85,25 @@
         </div>
     </div>
     <div class="wrapper-grafico">
-        <div class="grafico"></div>
-        <div class="grafico"></div>
+        <div class="grafico">
+            <h3 style="color: white; margin-left: 30px; margin-top: 35px;">Agendamentos por Dia da Semana</h3>
+            <div class="apex"></div>
+        <apexchart class="apex"
+        type="bar"
+        :options="barOptions"
+        :series="barSeries"
+        height="280"
+      />
+        </div>
+        <div class="grafico">
+            <h3 style="color: white; margin-left: 30px; margin-top: 35px;">Faturamento Mensal</h3>
+            <apexchart class="apex"
+            type="line"
+            :options="lineOptions"
+            :series="lineSeries"
+            height="280"
+            />
+        </div>
     </div>
     <div class="barbeiros-mes">
         <h1>Top Barbeiros do Mês</h1>
@@ -177,9 +234,11 @@
     height: 100%;
     width: 100%;
     border-radius: 10px;
-    border: 2px solid #333333;
+    border: 2px solid #333333;;
 }
-
+.apex{
+    margin-top: 30px;
+}
 .barbeiros-mes {
     background-color: #1A1A1A;
     height: 360px;
@@ -263,4 +322,5 @@
     color: #8B978B;
     font-size: 14px;
 }
+
 </style>
