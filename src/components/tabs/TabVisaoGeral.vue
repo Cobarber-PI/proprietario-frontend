@@ -44,6 +44,13 @@
             </div>
         </div>
     </div>
+    <div class="wrapper-grafico">
+        <div class="grafico"></div>
+        <div class="grafico"></div>
+    </div>
+    <div class="barbeiros-mes">
+
+    </div>
 </template>
 
 <style scoped>
@@ -58,7 +65,7 @@
 }
 
 .infos-wrapper {
-    width: 290px;
+    width: 100%;
     height: 100%;
     background-color: #1A1A1A;
     border-radius: 10px;
@@ -99,5 +106,28 @@
 .logo-info img {
     width: 1.5rem;
     height: 1.5rem;
+}
+.wrapper-grafico{
+    height: 400px;
+    width: 1180px;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+    gap: 20px;
+}
+.grafico{
+    background-color: #1A1A1A;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+
+}
+.barbeiros-mes{
+    background-color: #1A1A1A;
+    height: 360px;
+    width: 1180px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
 }
 </style>
