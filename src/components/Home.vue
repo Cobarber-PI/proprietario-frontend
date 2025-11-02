@@ -142,7 +142,7 @@ nav {
     background: none;
     border: none;
     color: #fff;
-    padding: 8px 16px;
+    padding: 8px 25px;
     cursor: pointer;
     font-size: 16px;
     border-bottom: 2px solid transparent;
