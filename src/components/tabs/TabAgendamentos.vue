@@ -1,3 +1,20 @@
+<script setup>
+import { ref } from 'vue'
+
+const selectedDate = ref(new Date())
+
+const attrs = ref([
+  {
+    key: 'today',
+    highlight: {
+      color: 'yellow',
+      fillMode: 'outline',
+    },
+    dates: selectedDate,
+  },
+])
+</script>
+
 <template>
   <div class="wrapper-geral">
         <div class="infos-wrapper">
@@ -9,22 +26,25 @@
         <div class="infos-wrapper">
             <div class="text-info">
                 <h3>Pendentes</h3>
-                <h1>1</h1>
+                <h1 style="color: #EAB308;">1</h1>
             </div>
         </div>
         <div class="infos-wrapper">
             <div class="text-info">
-                <h3>Faturamento Mensal</h3>
-                <h1>R$ 14.500</h1>
+                <h3>Confirmados</h3>
+                <h1 style="color: #3B82F6;">1</h1>
             </div>
         </div>
         <div class="infos-wrapper">
             <div class="text-info">
-                <h3>Faturamento Mensal</h3>
-                <h1>R$ 14.500</h1>
+                <h3>Hoje</h3>
+                <h1 style="color: #EAB308;">0</h1>
             </div>
         </div>
     </div>
+      <VCalendar transparent borderless 
+      />
+
 </template>
 <style scoped>
 .wrapper-geral {
