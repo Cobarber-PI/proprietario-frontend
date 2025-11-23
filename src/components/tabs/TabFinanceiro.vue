@@ -127,7 +127,7 @@ const pieOptions = ref({
         </div>
     </div>
     <div class="despesas-detalhamento">
-        <h1>Top Barbeiros do Mês</h1>
+        <h1>Detalhamento de Despesas - Junho 2025</h1>
         <div class="content">
             <div class="despesas">
                 <div class="parte-esquerda">

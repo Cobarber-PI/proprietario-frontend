@@ -20,7 +20,7 @@
 
     <div class="tabs">
         <button v-for="tab in tabs" :key="tab.key" :class="{ active: activeTab === tab.key }"
-            @click="activeTab = tab.key">
+            @click="activeTab = tab.key" style="background-color:">
             {{ tab.label }}
         </button>
     </div>
@@ -36,9 +36,7 @@ import TabVisaoGeral from './tabs/TabVisaoGeral.vue';
 import TabAgendamentos from './tabs/TabAgendamentos.vue';
 import TabBarbeiros from './tabs/TabBarbeiros.vue';
 import TabClientes from './tabs/TabClientes.vue';
-import TabAvaliacoes from './tabs/TabAvaliacoes.vue';
 import TabFinanceiro from './tabs/TabFinanceiro.vue';
-import TabNotificacoes from './tabs/TabNotificacoes.vue';
 import TabConfiguracoes from './tabs/TabConfiguracoes.vue';
 
 const tabs = [
@@ -46,9 +44,7 @@ const tabs = [
     { label: 'Agendamentos', key: 'agendamentos', component: TabAgendamentos },
     { label: 'Barbeiros', key: 'barbeiros', component: TabBarbeiros },
     { label: 'Clientes', key: 'clientes', component: TabClientes },
-    { label: 'Avaliações', key: 'avaliacoes', component: TabAvaliacoes },
     { label: 'Financeiro', key: 'financeiro', component: TabFinanceiro },
-    { label: 'Notificações', key: 'notificacoes', component: TabNotificacoes },
     { label: 'Configurações', key: 'configuracoes', component: TabConfiguracoes },
 ];
 const activeTab = ref(localStorage.getItem('activeTab') || 'visao');
@@ -156,5 +152,34 @@ nav {
 
 .tab-content {
     margin: 0 80px;
+}
+
+.tabs button:hover {
+    color: #F8C630;
+    border-bottom: 2px solid #F8C630;
+}
+
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tabs button {
+        padding: 8px 0;
+    }
+
+    .tab-content {
+        margin: 0 20px;
+    }
+
+    .tabs button:hover {
+        background-color: #F8C630;
+        width: 100%;
+        color: #1A1A1A;
+    }
+    .text, .info-text{
+        display: none;
+    }
 }
 </style>

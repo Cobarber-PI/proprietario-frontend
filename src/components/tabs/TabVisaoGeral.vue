@@ -1,44 +1,44 @@
 <script setup>
 import { ref } from 'vue';
 const barSeries = ref([
-  { name: 'Agendamentos', data: [10, 18, 14, 22, 28, 36, 18] }
+    { name: 'Agendamentos', data: [10, 18, 14, 22, 28, 36, 18] }
 ])
 const barOptions = ref({
-  chart: { toolbar: { show: false }, background: '#1A1A1A' },
-  colors: ['#F7C630'],
-  plotOptions: { bar: { borderRadius: 5, } },
-  xaxis: {
-    categories: ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-    labels: { style: { colors: '#9aa0a6' } }
-  },
-  yaxis: {
-    labels: { style: { colors: '#9aa0a6' } },
-  },
-  grid: { borderColor: '#2a2a2a', },
-  tooltip: { theme: 'dark' },
-  dataLabels: { enabled: false },
-  legend: { show: false }
+    chart: { toolbar: { show: false }, background: '#1A1A1A' },
+    colors: ['#F7C630'],
+    plotOptions: { bar: { borderRadius: 5, } },
+    xaxis: {
+        categories: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        labels: { style: { colors: '#9aa0a6' } }
+    },
+    yaxis: {
+        labels: { style: { colors: '#9aa0a6' } },
+    },
+    grid: { borderColor: '#2a2a2a', },
+    tooltip: { theme: 'dark' },
+    dataLabels: { enabled: false },
+    legend: { show: false }
 })
 
 const lineSeries = ref([
-  { name: 'Faturamento', data: [8200, 9000, 11800, 11000, 13500, 15000] }
+    { name: 'Faturamento', data: [8200, 9000, 11800, 11000, 13500, 15000] }
 ])
 
 const lineOptions = ref({
-  chart: { toolbar: { show: false }, background: '#1A1A1A' },
-  stroke: { curve: 'smooth', width: 3 },
-  colors: ['#F2C94C'],
-  xaxis: {
-    categories: ['Jan','Fev','Mar','Abr','Mai','Jun'],
-    labels: { style: { colors: '#9aa0a6' } }
-  },
-  yaxis: {
-    labels: { style: { colors: '#9aa0a6' }, formatter: val => `R$ ${Number(val).toLocaleString()}` }
-  },
-  grid: { borderColor: 'rgba(255,255,255,0.03)' },
-  tooltip: { theme: 'dark' },
-  dataLabels: { enabled: false },
-  markers: { size: 4 }
+    chart: { toolbar: { show: false }, background: '#1A1A1A' },
+    stroke: { curve: 'smooth', width: 3 },
+    colors: ['#F2C94C'],
+    xaxis: {
+        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        labels: { style: { colors: '#9aa0a6' } }
+    },
+    yaxis: {
+        labels: { style: { colors: '#9aa0a6' }, formatter: val => `R$ ${Number(val).toLocaleString()}` }
+    },
+    grid: { borderColor: 'rgba(255,255,255,0.03)' },
+    tooltip: { theme: 'dark' },
+    dataLabels: { enabled: false },
+    markers: { size: 4 }
 })
 </script>
 <template>
@@ -88,21 +88,11 @@ const lineOptions = ref({
         <div class="grafico">
             <h3 style="color: white; margin-left: 30px; margin-top: 35px;">Agendamentos por Dia da Semana</h3>
             <div class="apex"></div>
-        <apexchart class="apex"
-        type="bar"
-        :options="barOptions"
-        :series="barSeries"
-        height="280"
-      />
+            <apexchart class="apex" type="bar" :options="barOptions" :series="barSeries" height="280" />
         </div>
         <div class="grafico">
             <h3 style="color: white; margin-left: 30px; margin-top: 35px;">Faturamento Mensal</h3>
-            <apexchart class="apex"
-            type="line"
-            :options="lineOptions"
-            :series="lineSeries"
-            height="280"
-            />
+            <apexchart class="apex" type="line" :options="lineOptions" :series="lineSeries" height="280" />
         </div>
     </div>
     <div class="barbeiros-mes">
@@ -115,6 +105,21 @@ const lineOptions = ref({
                     </div>
                     <div class="info-esquerda">
                         <h1>João Silva</h1>
+                        <p>30 Cortes</p>
+                    </div>
+                </div>
+                <div class="parte-direita">
+                    <h1>R$ 1.250</h1>
+                    <p>Faturamento</p>
+                </div>
+            </div>
+            <div class="barbeiros">
+                <div class="parte-esquerda">
+                    <div class="img-esquerda">
+                        <img src="/public/home/cifra.svg" alt="">
+                    </div>
+                    <div class="info-esquerda">
+                        <h1>Carlos Silva</h1>
                         <p>45 Cortes</p>
                     </div>
                 </div>
@@ -129,27 +134,12 @@ const lineOptions = ref({
                         <img src="/public/home/cifra.svg" alt="">
                     </div>
                     <div class="info-esquerda">
-                        <h1>João Silva</h1>
-                        <p>45 Cortes</p>
+                        <h1>Pedro Henrique (PH)</h1>
+                        <p>02 Cortes</p>
                     </div>
                 </div>
                 <div class="parte-direita">
-                    <h1>R$ 1.500</h1>
-                    <p>Faturamento</p>
-                </div>
-            </div>
-            <div class="barbeiros">
-                <div class="parte-esquerda">
-                    <div class="img-esquerda">
-                        <img src="/public/home/cifra.svg" alt="">
-                    </div>
-                    <div class="info-esquerda">
-                        <h1>João Silva</h1>
-                        <p>45 Cortes</p>
-                    </div>
-                </div>
-                <div class="parte-direita">
-                    <h1>R$ 1.500</h1>
+                    <h1>R$ 90</h1>
                     <p>Faturamento</p>
                 </div>
             </div>
@@ -173,11 +163,9 @@ const lineOptions = ref({
     height: 100%;
     background-color: #1A1A1A;
     border-radius: 10px;
-    border: 1px solid #333333;
     display: flex;
     align-items: center;
     border: 2px solid #333333;
-
 }
 
 .text-info {
@@ -234,11 +222,14 @@ const lineOptions = ref({
     height: 100%;
     width: 100%;
     border-radius: 10px;
-    border: 2px solid #333333;;
+    border: 2px solid #333333;
+    ;
 }
-.apex{
+
+.apex {
     margin-top: 30px;
 }
+
 .barbeiros-mes {
     background-color: #1A1A1A;
     height: 360px;
