@@ -12,17 +12,17 @@
             <div class="grid two-cols">
                 <label class="field">
                     <span class="label">Nome da Barbearia</span>
-                    <input v-model="form.name" placeholder="Barbearia Premium" />
+                    <input v-model="form.nome" placeholder="Nome da Barbearia" />
                 </label>
 
                 <label class="field">
                     <span class="label">CNPJ</span>
-                    <input v-model="form.cnpj" placeholder="12.345.678/0001-90" />
+                    <input v-model="form.cnpj" placeholder="CNPJ" />
                 </label>
 
                 <label class="field">
                     <span class="label">Telefone</span>
-                    <input v-model="form.phone" placeholder="(11) 3456-7890" />
+                    <input v-model="form.telefone" placeholder="(11) 3456-7890" />
                 </label>
 
                 <label class="field">
@@ -32,12 +32,12 @@
 
                 <label class="field full">
                     <span class="label">Endereço Completo</span>
-                    <input v-model="form.address" placeholder="Rua dos Barbeiros, 123 - Centro, São Paulo - SP" />
+                    <input v-model="form.endereco" placeholder="Rua dos Barbeiros, 123 - Centro, São Paulo - SP" />
                 </label>
 
                 <label class="field full">
                     <span class="label">Descrição</span>
-                    <textarea v-model="form.description" rows="3"
+                    <textarea v-model="form.descricao" rows="3"
                         placeholder="Barbearia premium com os melhores profissionais da região. Atendimento personalizado e ambiente acolhedor."></textarea>
                 </label>
             </div>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="hours-list">
-                <div class="hour-row" v-for="(d, idx) in hours" :key="d.day">
+                <div class="hour-row" v-for="(d) in hours" :key="d.day">
                     <div class="day">{{ d.day }}</div>
 
                     <div class="controls">
@@ -70,7 +70,6 @@
             </div>
         </div>
 
-        <!-- Configurações de Pagamento -->
         <div class="card">
             <div class="card-header">
                 <h3>Configurações de Pagamento</h3>
@@ -79,13 +78,13 @@
             <div class="grid two-cols">
                 <label class="field">
                     <span class="label">Taxa de Cancelamento (R$)</span>
-                    <input v-model="form.cancelFee" placeholder="10,00" />
+                    <input placeholder="10,00" />
                     <small class="hint">Cobrada em cancelamentos com menos de 3h de antecedência</small>
                 </label>
 
                 <label class="field">
                     <span class="label">Comissão Padrão (%)</span>
-                    <input v-model="form.defaultCommission" placeholder="50" />
+                    <input placeholder="50" />
                     <small class="hint">Percentual padrão para novos barbeiros</small>
                 </label>
             </div>
@@ -94,25 +93,15 @@
         <!-- Footer actions -->
         <div class="actions">
             <button class="btn btn-ghost">Cancelar</button>
-            <button class="btn btn-primary">Salvar Configurações</button>
+            <button class="btn btn-primary" @click="handleSubmit">Salvar Configurações</button>
         </div>
     </section>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { useBarbeariaStore } from '@/stores/barbearia';
+import { reactive, ref } from 'vue';
 
-const form = reactive({
-    name: 'Barbearia Premium',
-    cnpj: '12.345.678/0001-90',
-    phone: '(11) 3456-7890',
-    email: 'contato@barbeariapremium.com',
-    address: 'Rua dos Barbeiros, 123 - Centro, São Paulo - SP',
-    description:
-        'Barbearia premium com os melhores profissionais da região. Atendimento personalizado e ambiente acolhedor.',
-    cancelFee: '10,00',
-    defaultCommission: '50'
-});
 
 const hours = reactive([
     { day: 'Segunda-feira', open: true, start: '09:00', end: '19:00' },
@@ -124,10 +113,25 @@ const hours = reactive([
     { day: 'Domingo', open: false, start: '00:00', end: '00:00' }
 ]);
 
-// purely aesthetic component — actions are placeholders
-function save() {
-    // placeholder for save functionality
-    console.log('save', { form, hours });
+const form = ref({
+    nome: '',
+    cnpj: '',
+    endereco: '',
+    telefone: '',
+    email: '',
+    descricao: '',
+});
+
+const barbeariaStore = useBarbeariaStore()
+
+async function handleSubmit() {
+    try {
+        await barbeariaStore.create(form.value)
+        alert("Configurações salvas com sucesso!")
+    } catch (err) {
+        console.error(err)
+        alert("Erro ao cadastrar")
+    }
 }
 </script>
 
